@@ -7,6 +7,7 @@ import express from 'express';
 import 'express-async-errors';
 import morgan from 'morgan';
 import chalk from 'chalk';
+import mainRouter from './routes/index.js';
 
 //! Variable d'environnment
 const { NODE_ENV, PORT } = process.env;
@@ -19,9 +20,7 @@ const app = express();
 app.use(morgan('tiny'));
 
 //* Routing
-app.get('/', (req, res) => {
-    res.json('Hello World');
-});
+app.use(mainRouter);
 
 //* Start
 app.listen(PORT, () => {
