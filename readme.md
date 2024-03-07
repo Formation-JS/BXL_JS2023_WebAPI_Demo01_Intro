@@ -38,3 +38,60 @@ Pour utiliser l'ESM dans le projet, il est necessaire d'ajouter dans le fichier 
 ```json
 "type": "module"
 ```
+
+## Les méthodes (verbe) des Web API (Standard du RestFull)
+
+- GET
+
+  Objectif : Récuperation d'une ressource. \
+  Reponse du serveur :
+  - 200 Success
+  - 404 Not Found
+
+- POST
+
+  Objectif : Création de ressource (ou Authentification). \
+  Reponse du serveur :
+  - 201 Created  /  200 Success
+  - 422 Unprocessable Content
+
+- PUT
+
+  Objectif : Création ou mise à jour d'une ressource. \
+  Reponse du serveur :
+  - 201 Created  /  204 No Content
+  - 404 Not Found
+  - 422 Unprocessable Content
+
+
+- PATCH
+
+  Objectif : Effectuer une mise à jour partielle d'une ressource. \
+  Reponse du serveur :
+  - 204 No Content
+  - 404 Not Found
+
+
+- DELETE
+
+  Objectif : Suppression d'un ressource. \
+  Reponse du serveur :
+  - 204 No Content
+  - 404 Not Found
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
