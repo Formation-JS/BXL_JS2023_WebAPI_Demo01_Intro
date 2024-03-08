@@ -18,6 +18,7 @@ const app = express();
 
 //* Middlewares
 app.use(morgan('tiny'));
+app.use(express.json());
 
 //* Routing
 app.use(mainRouter);

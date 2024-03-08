@@ -40,6 +40,21 @@ const personService = {
     getById: async (id) => {
         const person = fakeData.people.find(p => p.personId === id);
         return new PersonDetailDTO(person);
+    },
+
+    add: async (person) =>  {
+        // Ajout de la personne dans le "Fake Data"
+        const personAdded = {
+            ...person,
+            personId: fakeData.nextId,
+        };
+        fakeData.people.push(personAdded)
+
+        // Incrementation de l'id
+        fakeData.nextId++ ;
+
+        // Envoi de la personne ajouter dans les données
+        return new PersonDetailDTO(personAdded);
     }
 
 };

@@ -8,6 +8,7 @@ Dépendences
 - dotenv: Permet de charger un fichier d'environnement
 - morgan: Logger de requete
 - chalk: De la couleurs dans le terminal 💖
+- yup: Validateur de données
 
 Dépendences de dev
 - nodemon: Outils de dev pour relancer le serveur

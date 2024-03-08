@@ -1,4 +1,5 @@
 import personService from '../services/person.service.js';
+import { personValidator } from '../validators/person.validator.js';
 
 const personController = {
 
@@ -33,7 +34,29 @@ const personController = {
     },
 
     add: async (req, res) => {
-        res.sendStatus(501);
+        // Récuperation des données à ajouter depuis le body de la requete
+        const personToAdd = req.body;
+        
+        // Validation des données
+        let data;
+        try {
+            data = await personValidator.validate(personToAdd);
+        }
+        catch(error) {
+            res.status(422)
+               .json({
+                    errorMessage: 'Les données sont invalides !'
+               });
+            return;
+        } 
+
+        // Appeler le service pour appliqué les regles business (Add to FakeData)
+        const personAdded = await personService.add(data);
+        
+        // Reponse de la requete (Created)
+        res.status(201)
+           .location(`/person/${personAdded.personId}`)
+           .json(personAdded);
     },
 
     update: async (req, res) => {
