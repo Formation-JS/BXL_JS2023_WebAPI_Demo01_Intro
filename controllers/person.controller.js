@@ -103,7 +103,21 @@ const personController = {
     },
 
     delete: async (req, res) => {
-        res.sendStatus(501);
+        // Récuperation de l'id
+        const personId = parseInt(req.params.id);
+
+        const personExists = await personService.getById(personId);
+        if(!personExists) {
+            res.sendStatus(404);
+            return;
+        }
+
+        const isDeleted = await personService.delete(personId);
+        if(!isDeleted) {
+            res.sendStatus(400);
+            return;
+        }
+        res.sendStatus(204);
     }
 };
 

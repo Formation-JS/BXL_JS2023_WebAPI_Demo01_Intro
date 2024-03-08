@@ -81,6 +81,17 @@ const personService = {
         personTarget.nbGuest = data.nbGuest;
 
         return true;
+    },
+
+    delete: async (personId) => {
+
+        const index = fakeData.people.findIndex(p => p.personId === personId);
+        if(index < 0) {
+            return false;
+        }
+
+        fakeData.people.splice(index, 1);
+        return true;
     }
 
 };
