@@ -39,7 +39,17 @@ const personService = {
 
     getById: async (id) => {
         const person = fakeData.people.find(p => p.personId === id);
-        return new PersonDetailDTO(person);
+
+        // Retourne des données dans un DTO (-> Gestion de 'undefined')
+        // v1
+        return (person !== undefined) ? new PersonDetailDTO(person) : null;
+        // v2
+        return (!!person) ? new PersonDetailDTO(person) : null;
+        // v3
+        if(person) {
+            return new PersonDetailDTO(person);
+        }
+        return null;
     },
 
     add: async (person) =>  {
