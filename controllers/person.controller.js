@@ -48,7 +48,7 @@ const personController = {
                     errorMessage: 'Les données sont invalides !'
                });
             return;
-        } 
+        }
 
         // Appeler le service pour appliqué les regles business (Add to FakeData)
         const personAdded = await personService.add(data);
@@ -60,7 +60,46 @@ const personController = {
     },
 
     update: async (req, res) => {
-        res.sendStatus(501);
+        // Récuperer l'id de l'élémént et les données du body
+        const personId = parseInt(req.params.id);
+        const personToUpdate = req.body;
+
+        // Test si l'element existe
+        // - Le mot clef "await" attend la resolution de la promesse
+        // - L'operateur "!" force un context boolean (thruty / falsy)
+        // - Si l'opérateur "!" est placé après le "await",
+        //   celui-ci affect la promesse et non le resultat de la promesse 
+        const personExists = await personService.getById(personId)
+        if(!personExists) {
+            res.sendStatus(404);
+            return;
+        }
+
+        // Validation des données
+        let data;
+        try {
+            data = await personValidator.validate(personToUpdate);
+        }
+        catch {
+            res.status(422)
+               .json({
+                    errorMessage: 'Les données sont invalides !' 
+               });
+            return;
+        }
+
+        // Traitement -> La mise à jour des données via le service
+        const isUpdated = await personService.update(personId, data);
+
+        if(!isUpdated) {
+            res.status(400)
+               .json({
+                    errorMessage : 'Une erreur s\'est produite.'
+               });
+        }
+
+        // Reponse de la requete (No Content)
+        res.sendStatus(204);
     },
 
     delete: async (req, res) => {

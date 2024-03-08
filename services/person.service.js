@@ -65,6 +65,22 @@ const personService = {
 
         // Envoi de la personne ajouter dans les données
         return new PersonDetailDTO(personAdded);
+    },
+
+    update: async (personId, data) => {
+        const personTarget = fakeData.people.find(p => p.personId === personId);
+
+        if(!personTarget) {
+            return false;
+        }
+
+        personTarget.email = data.email;
+        personTarget.firstname = data.firstname;
+        personTarget.lastname = data.lastname;
+        personTarget.confirm = data.confirm;
+        personTarget.nbGuest = data.nbGuest;
+
+        return true;
     }
 
 };
