@@ -1,3 +1,5 @@
+import { PersonDetailDTO, PersonListDTO } from '../dto/person.dto.js';
+
 // Fake Data -> Object JS (Permet de stocker les données en mémoire)
 const fakeData = {
     people: [
@@ -32,12 +34,12 @@ const fakeData = {
 const personService = {
 
     getAll: async () => {
-        return fakeData.people;
+        return fakeData.people.map(p => new PersonListDTO(p));
     },
 
     getById: async (id) => {
         const person = fakeData.people.find(p => p.personId === id);
-        return person;
+        return new PersonDetailDTO(person);
     }
 
 };
