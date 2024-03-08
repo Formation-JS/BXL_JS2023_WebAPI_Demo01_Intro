@@ -56,7 +56,8 @@ const personService = {
         // Ajout de la personne dans le "Fake Data"
         const personAdded = {
             ...person,
-            personId: fakeData.nextId,
+            nbGuest: person.confirm ? person.nbGuest : null,
+            personId: fakeData.nextId
         };
         fakeData.people.push(personAdded)
 
@@ -78,7 +79,7 @@ const personService = {
         personTarget.firstname = data.firstname;
         personTarget.lastname = data.lastname;
         personTarget.confirm = data.confirm;
-        personTarget.nbGuest = data.nbGuest;
+        personTarget.nbGuest = data.confirm ? data.nbGuest : null;
 
         return true;
     },
